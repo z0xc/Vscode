@@ -1,0 +1,59 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch TCPClient",
+            "request": "launch",
+            "mainClass": "demo01.TCP.TCPClient",
+            "projectName": "Vscode_cefef904"
+        },
+        {
+            "type": "java",
+            "name": "Launch TCPClient",
+            "request": "launch",
+            "mainClass": "TCPClient"
+        },
+        {
+            "type": "java",
+            "name": "Launch TCPServer",
+            "request": "launch",
+            "mainClass": "TCPServer"
+        },
+        {
+            "type": "java",
+            "name": "Launch TCPClient",
+            "request": "launch",
+            "mainClass": "com.itheima.demo01.TCP.TCPClient",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Launch TCPServer",
+            "request": "launch",
+            "mainClass": "com.itheima.demo01.TCP.TCPServer",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "Launch Shot",
+            "request": "launch",
+            "mainClass": "Shot",
+            "projectName": "Vscode_f941151c"
+        },
+        {
+            "name": "(Windows) 启动",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "输入程序名称，例如 ${workspaceFolder}/a.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "externalTerminal"
+        }
+    ]
+}
