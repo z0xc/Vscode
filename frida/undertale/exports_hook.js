@@ -2,7 +2,8 @@ function exportshook(){
         // var soAddr = Module.findBaseAddress("libyoyo.so");
         // console.log(soAddr);
         // GET_RValue		
-        var funAddr = Module.findExportByName("libyoyo.so", "_Z10GET_RValueP6RValueS0_i");
+        // var funAddr = Module.findExportByName("libyoyo.so", "_Z10GET_RValueP6RValueS0_i");
+        var funAddr = Module.findExportByName("libyoyo.so", "_Z10SET_RValueP6RValueS0_i");
         console.log("funAddr:",funAddr);
         if(funAddr != null){
                 Interceptor.attach(funAddr, {
