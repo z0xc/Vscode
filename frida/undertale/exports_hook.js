@@ -48,7 +48,7 @@ function hook1(){
                                                 
                                                 console.error("args2:",args[2]);
                                                 p2.writeDouble(p1.readDouble());  //锁血
-                                                // console.log(a);
+                                                console.error(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n');
                                         }
 
                                         // console.log(args[3].toInt32());
@@ -78,7 +78,7 @@ function hook2(){
         if(funAddr != null){
                 Interceptor.attach(funAddr, {
                         onEnter: function(args){
-                                if(args[2] == 0xBF76BAA0 || args[2] == 0xc36fb9ac){
+                                if(args[2] == 0xae67ea6c || args[2] == 0xae67ea6c){
                                         console.warn("_Z22Variable_Global_SetVariiP6RValue");
                                         console. log(" global args0:",args[0]);
                                         var p1 = ptr(args[0]);
@@ -119,7 +119,7 @@ function hook3(){
         if(funAddr != null){
                 Interceptor.attach(funAddr, {
                         onEnter: function(args){
-                                // if(args[0] == 0xD3483B20 || args[1] == 0xD3483B20 || args[2] == 0xa28fbdac){
+                                if(args[0] == 0xc155f22c || args[1] == 0xc155f22c || args[2] == 0xc155f22c){
                                         console.warn("_Z5DoPopjPhPKhP6VMExec");
                                         console. log("DoPop args0",args[0]);
                                         var p1 = ptr(args[0]);
@@ -140,7 +140,7 @@ function hook3(){
                                         console.warn(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n');
                                         console.warn(JSON.stringify(this.context));
 
-                                // }
+                                }
                         
                         },
                         onLeave: function(retval){
@@ -435,6 +435,62 @@ function hook9(){
                 });
         }
 }
+
+//枚举导入导出表
+function hook10(){
+//     var imports = Module.enumerateImports("libyoyo.so");
+//     for(var i = 0; i < imports.length; i++){
+//         if(imports[i].name == "strncat"){
+//             console.log(JSON.stringify(imports[i]));
+//             console.log(imports[i].address);
+//             break;
+//         }
+//     }
+    
+//     var exports = Module.enumerateExports("libyoyo.so");
+//     for(var i = 0; i < exports.length; i++){
+//         console.log(JSON.stringify(exports[i]));
+//     }
+
+    // var helloAddr = Module.findExportByName("libxiaojianbang.so", "Java_com_xiaojianbang_app_NativeHelper_helloFromC");
+    // console.log(helloAddr);
+
+//     var symbols = Module.enumerateSymbols("Health");
+//     var symbols = Module.enumerateSymbols("Health",{
+
+//     });
+//     console.log(JSON.stringify(symbols));
+        Java.perform(function() {
+
+                // var module = Module.load('libyoyo.so');
+                // console.log(typeof module);
+                // console.log("module:",JSON.stringify(module));
+                // var symbols = module.enumerateSymbols();
+                // console.log(typeof symbols);
+                // console.log("symbols:",JSON.stringify(symbols));
+                // for(var i = 0;i<10;i++){
+                //         // console.log("isGlobal:",symbols[i].isGlobal);
+                //         // console.log("type:",symbols[i].type);
+                //         // console.log("section:",JSON.stringify(symbols[i].section));
+                //         console.log("name:",symbols[i].name);
+                //         // console.log("address:",symbols[i].address);
+                // } 
+                // var soAddr = Module.findBaseAddress("libyoyo.so");
+
+                // console.log(soAddr);
+                // var bssAddr = soAddr.add(0x0053BA88);
+                // console.log(bssAddr);
+                // var realAddr = bssAddr.readPointer();
+                // console.log(1);
+                // console.log("symbols:",symbols);
+                // var health = Module.findExportByName("libyoyo.so", "Health");
+                var exports = Module.enumerateExports("libyoyo.so");
+
+                console.log(typeof exports);
+                // console.log("health:",JSON.stringify(exports));
+        }
+        );
+}
 function main(){
        	console.log("main--------begin");
 	hook1();
@@ -446,6 +502,7 @@ function main(){
         // hook7();
         // hook8();
         // hook9();
+        // hook10();
 
 	console.log("main--------end");
 
