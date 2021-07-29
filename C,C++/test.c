@@ -1,6 +1,7 @@
 #include<stdio.h>
 int main(){
-    char a[] = "zhouxinchi";
+    char a[] = "z";
+    // char b  = '中';
 
     char* p = a;
     char* q = "zhouxinchi";
@@ -8,7 +9,10 @@ int main(){
     printf("%x\n",p);
     printf("%x\n",q);
 
+    printf("%x\n",a);
+    // printf("%x\n",b);
     printf("%s",a);
+    // printf("%s",b);
 
 
 }

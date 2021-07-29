@@ -35,6 +35,9 @@ function hook1(){
                                         // console.error(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n');
                                         // console.error(JSON.stringify(this.context));
                                         if(a1 > 0 && a1 < 100 && a1 > a2  && a2!=0){
+
+                                                var Addr = Module.findExportByName("libyoyo.so", "g_pGlobal");
+                                                console.log("global:",Addr);
                                                 console.log("a1: ",a1);
                                                 console.log("a2: ",a2);
 
