@@ -5,10 +5,10 @@
 using namespace std;
 int main()
 {
-    //´´½¨Ò»¸ö¿ÕµÄvector
+    //åˆ›å»ºä¸€ä¸ªç©ºçš„vector
     vector<int> obv;
-    //ÓÃsize£¨£©º¯Êý·µ»ØÔªËØ¸öÊý
-    cout<<"obvµÄÔªËØ¸öÊýÎª£º"<<obv.size()<<endl;
+    //ç”¨sizeï¼ˆï¼‰å‡½æ•°è¿”å›žå…ƒç´ ä¸ªæ•°
+    cout<<"obvçš„å…ƒç´ ä¸ªæ•°ä¸ºï¼š"<<obv.size()<<endl;
      
     double sz[5] = {1,2,3,4,5};
     
