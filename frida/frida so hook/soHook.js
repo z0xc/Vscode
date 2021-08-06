@@ -86,7 +86,7 @@ function hookTest3(){
                 console.log(args[4]);
             },
             onLeave: function(retval){
-                retval.replace(20000);
+                // retval.replace(20000);
                 console.log("retval", retval.toInt32());
             }
         });
