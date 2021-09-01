@@ -266,12 +266,10 @@ function hook6(){
         if(funaddr != null){
                 Interceptor.attach(funaddr,{
                         onEnter:function(args){
-                        if(args[1] == 0x3f800000){
                                 console.log("args[0]",args[0]);
                                 console.log("args[0]",args[0].readInt());
                                 console.log("args[1]",args[1]);
-                                console.log("args[1]",args[1]);
-                                // args[1] = ptr(0);
+                                args[1] = ptr(0);
                                 console.log("args[1]",args[1]);
                                 // console.log("args[1]",args[1].readFloat());
                                 // console.log("args[0]",args[0].readInt());
@@ -293,7 +291,6 @@ function hook6(){
                                 // console.log("血：",b.readInt());
                                 // console.log(args[4].toInt32());
                                 console.warn(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\n') + '\n');
-                        }
                         },
                         onLeave:function(retval){
                                 console.log("onLeave");
@@ -400,57 +397,6 @@ function test(){
         }
 
 }
-function inlinehook1(){
-        var so_name = "libAndroidGame.so";
-        // var fun_name = "_ZNK21KosovoCurrentDateTime12GetNightTimeERjS0_";
-        var soaddr = Module.findBaseAddress(so_name);
-        // var funaddr = soaddr.add(0x0000000001CE3818);
-        var funaddr = ptr(0xC4F86A1E);
-        // var gKosovoCurrentDateTime = soaddr.add(0x008E11F0);
-        // console.log("gKosovoCurrentDateTime addr:",gKosovoCurrentDateTime);
-        // var gKosovoCurrentDateTime = soaddr.add(0x008E11F0);
-        // console.log("gKosovoCurrentDateTime addr:",gKosovoCurrentDateTime);
-        // var funaddr = Module.findExportByName(so_name,fun_name);
-        // var funaddr = null;
-        console.log("soaddr:",soaddr);
-        // console.log(fun_name," addr: ",funaddr);
-        if(funaddr != null){
-                Interceptor.attach(funaddr,{
-                        onEnter:function(args){
-                                // this.context.pc = endaddr;
-                                // console.log(JSON.stringify(this.context));
-                                // console.log("args[0]",args[0]);
-                                // // console.log("args[0]",args[0].readInt());
-                                // console.log("args[1]",args[1]);
-                                // console.log("args[2]",args[2]);
-                                // console.log("args[3]",args[3]);
-                                // console.log("args[4]",args[4]);
-                                // console.log("args[1]",args[1].readInt());
-                                // console.log(typeof args[1]);
-                                // console.log("args[2]",args[1].readInt());
-                                // console.log("args[3]",args[1].toInt32());
-                                // console.log("args[4]",args[1].toInt32());
-                                // console.log("args[5]",args[1].toInt32());
-                                // console.log("args[6]",args[1].toInt32());
-                                // console.log("args[7]",args[1].toInt32());
-                                // var a = ptr(0x7884695560);
-                                // var b = ptr(0x79096298f4);
-                                // console.log("血：",a.readInt());
-                                // console.log("血：",b.readInt());
-                                // console.log(args[4].toInt32());
-                                // console.warn(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\n') + '\n');
-                        },
-                        onLeave:function(retval){
-                                // console.log("onLeave");
-                                // console.log("retval:",retval);
-                                // retval.replace(0x0);
-                        }
-                        
-                        
-                })
-        }
-
-}
 function main(){
         console.log("main begin");
         // hook1();
@@ -460,8 +406,7 @@ function main(){
         // hook5()
         // hook6();
         // hook7();
-        // test();
-        // inlinehook1();
+        test();
         console.log("main end");
 }
 setImmediate(main)

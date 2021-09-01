@@ -1,8 +1,8 @@
 
 function set_read_write_break()
 {
-	var soAddr = Module.findBaseAddress("libpvz.so");
-    //console.log(soAddr);
+	var soAddr = Module.findBaseAddress("libAndroidGame.so");
+        //console.log(soAddr);
 	console.log("set_read_write_break---------------------------------begin");
 	Process.setExceptionHandler(function(exp) {
 		console.log("ExceptionHandler");
