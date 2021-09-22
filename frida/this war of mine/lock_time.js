@@ -273,7 +273,6 @@ function hook6(){
                         // if(args[1] == 0x3f800000){
                                 console.log("args[0]",args[0]);
                                 console.log("args[0]",args[0].readInt());
-                                var arg1 = ptr(0x3f800000); 
                                 console.log("args[1]",args[1]);
                                 // console.log("args[1]",args[1]);
                                 args[1] = ptr(0x3f8000000);
@@ -655,7 +654,7 @@ function main(){
         // hook3();
         // hook4();
         // hook5()
-        // hook6();
+        hook6();
         // hook7();
         // hook8();
         // hook9();
