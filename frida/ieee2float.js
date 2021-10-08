@@ -42,3 +42,16 @@ function add_element(){
         }
 
 }
+// var a = ptr(0x3f800000);
+// function hexToSingle(num){
+//         var num = num.toString(16);
+// 	var a = num;
+// 	var b = parseInt(a,16);
+// 	var s = b&0x80000000/0x80000000;
+// 	var e = (b&0x7f800000)/0x800000-127;
+// 	var c = (b&0x7fffff)/0x800000;
+// 	var re = Math.pow(-1,s)*(1+c)*Math.pow(2,e);
+// 	return re;
+// }
+
+// hexToSingle(a);
