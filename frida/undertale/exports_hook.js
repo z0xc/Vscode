@@ -9,11 +9,11 @@ function hook1(){
         if(funAddr != null){
                 Interceptor.attach(funAddr, {
                         onEnter: function(args){
-                                var flag = Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n';
+                                // var flag = Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n';
                                 // console.log(flag);
-                                var s = "libyoyo.so!_Z22Variable_Global_SetVariiP6RValue+0x50\\n0x1100\\n";
-                                if(flag.indexOf(s)> -1){
-                                // if(args[0] == 0xbe513820){
+                                // var s = "libyoyo.so!_Z22Variable_Global_SetVariiP6RValue+0x50\\n0x1100\\n";
+                                // if(flag.indexOf(s)> -1){
+                                if(args[0] == 0xb1328200){
                                         // console.log(flag);
                                         // console.log(s);
                                         // console.log(flag.indexOf(s));
@@ -34,7 +34,7 @@ function hook1(){
                                         // console.error("====================================================================------------------------------------");
                                         // console.error(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n');
                                         // console.error(JSON.stringify(this.context));
-                                        if(a1 > 0 && a1 < 100 && a1 > a2  && a2!=0){
+                                        // if(a1 > 0 && a1 < 100 && a1 > a2  && a2!=0){
                                                 console.log("a1: ",a1);
                                                 console.log("a2: ",a2);
 
@@ -47,9 +47,9 @@ function hook1(){
                                                 console.error("args1: 值",p2.readDouble());
                                                 
                                                 console.error("args2:",args[2]);
-                                                p2.writeDouble(p1.readDouble());  //锁血
+                                                // p2.writeDouble(p1.readDouble());  //锁血
                                                 console.error(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n');
-                                        }
+                                        // }
 
                                         // console.log(args[3].toInt32());
                                         // console.log(args[4].toInt32());
@@ -78,35 +78,41 @@ function hook2(){
         if(funAddr != null){
                 Interceptor.attach(funAddr, {
                         onEnter: function(args){
-                                if(args[2] == 0xae67ea6c || args[2] == 0xae67ea6c){
-                                        console.warn("_Z22Variable_Global_SetVariiP6RValue");
+                                // if(args[2] == 0xae67ea6c || args[2] == 0xae67ea6c){
+                                        // console.warn("_Z22Variable_Global_SetVariiP6RValue");
                                         console. log(" global args0:",args[0]);
-                                        var p1 = ptr(args[0]);
+                                        // var p1 = ptr(args[0]);
                                         // console.log("args0 值",p1.readDouble());
 
                                     
                                         console.log("global args1:",args[1]);
-                                        var p2 = ptr(args[1]);
+                                        // var p2 = ptr(args[1]);
                                         // console.log("args1 值",p2.readInt());
 
                                         console.log("global args2:",args[2]);
-                                        var p3 = ptr(args[2]);
-                                        console.log("args2 值:",p3.readDouble());
-                                        console.log("====================================================================------------------------------------");
+                                        // var p3 = ptr(args[2]);
+                                        console.log("args2 值:",args[2].readDouble());
                                         console.warn(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n');
                                         console.warn(JSON.stringify(this.context));
 
                                         // console.log(args[3].toInt32());
                                         // console.log(args[4].toInt32());
-                                }
+                                // }
                         
                         },
                         onLeave: function(retval){
                                 // if(retval == 0xD3483B20 ){
-                                //         console.log("retval:",retval);
+                                        console.log("retval:",retval);
+                                        var floatp = Memory.alloc(8); 
+                                        if(retval != 0){
+                                                var float = floatp.writePointer(ptr(retval)).readPointer().readDouble();
+                                                console.log("retval 值为:",float);
+                                        }
+                                        
                                 //         var p4 = ptr(retval);
                                 //         console.log("retval 值",p4.readDouble());
                                 // }
+                                        console.log("====================================================================------------------------------------");
                         }
                 });
         }
@@ -493,8 +499,8 @@ function hook10(){
 }
 function main(){
        	console.log("main--------begin");
-	hook1();
-        // hook2();
+	// hook1();
+        hook2();
         // hook3();
         // hook4();
         // hook5();
