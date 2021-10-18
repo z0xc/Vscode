@@ -78,7 +78,8 @@ function hook2(){
         if(funAddr != null){
                 Interceptor.attach(funAddr, {
                         onEnter: function(args){
-                                // if(args[2] == 0xae67ea6c || args[2] == 0xae67ea6c){
+                                this.args0 = args[0];
+                                if(this.args0 == 0x186bd ){
                                         // console.warn("_Z22Variable_Global_SetVariiP6RValue");
                                         console. log(" global args0:",args[0]);
                                         // var p1 = ptr(args[0]);
@@ -90,6 +91,8 @@ function hook2(){
                                         // console.log("args1 值",p2.readInt());
 
                                         console.log("global args2:",args[2]);
+                                        args[2].writeDouble(99);
+                                        // args[2] = ptr(0);
                                         // var p3 = ptr(args[2]);
                                         console.log("args2 值:",args[2].readDouble());
                                         console.warn(Thread.backtrace(this.context, Backtracer.ACCURATE).map(DebugSymbol.fromAddress).join('\\n') + '\\n');
@@ -97,22 +100,23 @@ function hook2(){
 
                                         // console.log(args[3].toInt32());
                                         // console.log(args[4].toInt32());
-                                // }
+                                }
                         
                         },
                         onLeave: function(retval){
-                                // if(retval == 0xD3483B20 ){
+                                if(this.args0 == 0x186bd ){
                                         console.log("retval:",retval);
                                         var floatp = Memory.alloc(8); 
-                                        if(retval != 0){
-                                                var float = floatp.writePointer(ptr(retval)).readPointer().readDouble();
-                                                console.log("retval 值为:",float);
-                                        }
+                                        // if(retval != 0){
+                                        var float = floatp.writePointer(ptr(retval)).readPointer().readDouble();
+                                        console.log("retval 值为:",float);
+                                        retval.replace(20);
+                                        // }
                                         
                                 //         var p4 = ptr(retval);
                                 //         console.log("retval 值",p4.readDouble());
-                                // }
                                         console.log("====================================================================------------------------------------");
+                                }
                         }
                 });
         }
